@@ -1,0 +1,19 @@
+# n/s/m/l 크기 비교용 고정 학습 조건. 네 모델에 동일하게 사용하세요.
+# 모든 구조 실험에서 같은 값을 유지하면 구조 변경의 효과를 비교하기 쉽습니다.
+# COCO 사전학습을 쓰지 않으므로 1 epoch 결과는 성능 비교에 의미가 없습니다.
+epochs: 100
+batch: 8  # n/s/m/l Baseline 공통 배치; 최종 평가 batch=1은 별도 유지
+imgsz: 640
+device: 0  # NVIDIA RTX 5070 Ti Laptop GPU; .venv의 CUDA용 PyTorch 사용
+workers: 8  # Windows 데이터 로더 프로세스 수
+seed: 42
+optimizer: SGD
+lr0: 0.01
+momentum: 0.937
+weight_decay: 0.0005
+patience: 30
+deterministic: true
+amp: false  # AMP 검사 과정의 별도 사전학습 모델 다운로드도 방지
+cache: false
+plots: true
+close_mosaic: 10

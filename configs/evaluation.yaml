@@ -1,0 +1,11 @@
+# 모든 실험에서 공통 사용. 변경하면 이전 속도/정확도 결과와 직접 비교하지 마세요.
+imgsz: 640
+device: cpu
+threads: 1
+conf: 0.001
+iou: 0.7
+max_det: 300
+warmup: 50
+benchmark_repetitions: 500
+# latency: 이미지 읽기/디코딩 제외, 전처리+모델+NMS+결과 CPU 복사 포함.
+# e2e: 디스크 읽기/디코딩까지 포함. 메모리: 전체 프로세스 RSS, decimal MB.

@@ -1,0 +1,2277 @@
+{
+  "model": "configs\\models\\yolov8s_baseline.yaml",
+  "model_sha256": "dae541430389fac163fd2b88754f16f0ceb6b774d4ae3f5ea94f38612755ae40",
+  "torch": "2.11.0+cu128",
+  "ultralytics": "8.4.158",
+  "input_shape": [
+    1,
+    3,
+    640,
+    640
+  ],
+  "scale": [
+    0.33,
+    0.5,
+    1024
+  ],
+  "method": "Conv2d multiply/add counts: MAC x 2; structural calculation on actual tensor shapes",
+  "excludes": [
+    "bias",
+    "BatchNorm",
+    "activation",
+    "pooling",
+    "resize",
+    "concat",
+    "softmax",
+    "box coordinate arithmetic",
+    "NMS"
+  ],
+  "note": "Untrained YAML model, no latency or accuracy benchmark. Zero input is sufficient for this fixed-shape Conv count.",
+  "total_conv_flops": 28437043200,
+  "layers": [
+    {
+      "index": 0,
+      "module": "Conv",
+      "source": -1,
+      "repeats": 1,
+      "conv_flops": 176947200,
+      "input_shapes": [
+        [
+          1,
+          3,
+          640,
+          640
+        ]
+      ],
+      "output_shapes": [
+        1,
+        32,
+        320,
+        320
+      ]
+    },
+    {
+      "index": 1,
+      "module": "Conv",
+      "source": -1,
+      "repeats": 1,
+      "conv_flops": 943718400,
+      "input_shapes": [
+        [
+          1,
+          32,
+          320,
+          320
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        160,
+        160
+      ]
+    },
+    {
+      "index": 2,
+      "module": "C2f",
+      "source": -1,
+      "repeats": 1,
+      "conv_flops": 1468006400,
+      "input_shapes": [
+        [
+          1,
+          64,
+          160,
+          160
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        160,
+        160
+      ]
+    },
+    {
+      "index": 3,
+      "module": "Conv",
+      "source": -1,
+      "repeats": 1,
+      "conv_flops": 943718400,
+      "input_shapes": [
+        [
+          1,
+          64,
+          160,
+          160
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        80,
+        80
+      ]
+    },
+    {
+      "index": 4,
+      "module": "C2f",
+      "source": -1,
+      "repeats": 2,
+      "conv_flops": 2516582400,
+      "input_shapes": [
+        [
+          1,
+          128,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        80,
+        80
+      ]
+    },
+    {
+      "index": 5,
+      "module": "Conv",
+      "source": -1,
+      "repeats": 1,
+      "conv_flops": 943718400,
+      "input_shapes": [
+        [
+          1,
+          128,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        40,
+        40
+      ]
+    },
+    {
+      "index": 6,
+      "module": "C2f",
+      "source": -1,
+      "repeats": 2,
+      "conv_flops": 2516582400,
+      "input_shapes": [
+        [
+          1,
+          256,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        40,
+        40
+      ]
+    },
+    {
+      "index": 7,
+      "module": "Conv",
+      "source": -1,
+      "repeats": 1,
+      "conv_flops": 943718400,
+      "input_shapes": [
+        [
+          1,
+          256,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        512,
+        20,
+        20
+      ]
+    },
+    {
+      "index": 8,
+      "module": "C2f",
+      "source": -1,
+      "repeats": 1,
+      "conv_flops": 1468006400,
+      "input_shapes": [
+        [
+          1,
+          512,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        512,
+        20,
+        20
+      ]
+    },
+    {
+      "index": 9,
+      "module": "SPPF",
+      "source": -1,
+      "repeats": 1,
+      "conv_flops": 524288000,
+      "input_shapes": [
+        [
+          1,
+          512,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        512,
+        20,
+        20
+      ]
+    },
+    {
+      "index": 10,
+      "module": "Upsample",
+      "source": -1,
+      "repeats": 1,
+      "conv_flops": 0,
+      "input_shapes": [
+        [
+          1,
+          512,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        512,
+        40,
+        40
+      ]
+    },
+    {
+      "index": 11,
+      "module": "Concat",
+      "source": [
+        -1,
+        6
+      ],
+      "repeats": 1,
+      "conv_flops": 0,
+      "input_shapes": [
+        [
+          [
+            1,
+            512,
+            40,
+            40
+          ],
+          [
+            1,
+            256,
+            40,
+            40
+          ]
+        ]
+      ],
+      "output_shapes": [
+        1,
+        768,
+        40,
+        40
+      ]
+    },
+    {
+      "index": 12,
+      "module": "C2f",
+      "source": -1,
+      "repeats": 1,
+      "conv_flops": 1887436800,
+      "input_shapes": [
+        [
+          1,
+          768,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        40,
+        40
+      ]
+    },
+    {
+      "index": 13,
+      "module": "Upsample",
+      "source": -1,
+      "repeats": 1,
+      "conv_flops": 0,
+      "input_shapes": [
+        [
+          1,
+          256,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        80,
+        80
+      ]
+    },
+    {
+      "index": 14,
+      "module": "Concat",
+      "source": [
+        -1,
+        4
+      ],
+      "repeats": 1,
+      "conv_flops": 0,
+      "input_shapes": [
+        [
+          [
+            1,
+            256,
+            80,
+            80
+          ],
+          [
+            1,
+            128,
+            80,
+            80
+          ]
+        ]
+      ],
+      "output_shapes": [
+        1,
+        384,
+        80,
+        80
+      ]
+    },
+    {
+      "index": 15,
+      "module": "C2f",
+      "source": -1,
+      "repeats": 1,
+      "conv_flops": 1887436800,
+      "input_shapes": [
+        [
+          1,
+          384,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        80,
+        80
+      ]
+    },
+    {
+      "index": 16,
+      "module": "Conv",
+      "source": -1,
+      "repeats": 1,
+      "conv_flops": 471859200,
+      "input_shapes": [
+        [
+          1,
+          128,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        40,
+        40
+      ]
+    },
+    {
+      "index": 17,
+      "module": "Concat",
+      "source": [
+        -1,
+        12
+      ],
+      "repeats": 1,
+      "conv_flops": 0,
+      "input_shapes": [
+        [
+          [
+            1,
+            128,
+            40,
+            40
+          ],
+          [
+            1,
+            256,
+            40,
+            40
+          ]
+        ]
+      ],
+      "output_shapes": [
+        1,
+        384,
+        40,
+        40
+      ]
+    },
+    {
+      "index": 18,
+      "module": "C2f",
+      "source": -1,
+      "repeats": 1,
+      "conv_flops": 1572864000,
+      "input_shapes": [
+        [
+          1,
+          384,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        40,
+        40
+      ]
+    },
+    {
+      "index": 19,
+      "module": "Conv",
+      "source": -1,
+      "repeats": 1,
+      "conv_flops": 471859200,
+      "input_shapes": [
+        [
+          1,
+          256,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        20,
+        20
+      ]
+    },
+    {
+      "index": 20,
+      "module": "Concat",
+      "source": [
+        -1,
+        9
+      ],
+      "repeats": 1,
+      "conv_flops": 0,
+      "input_shapes": [
+        [
+          [
+            1,
+            256,
+            20,
+            20
+          ],
+          [
+            1,
+            512,
+            20,
+            20
+          ]
+        ]
+      ],
+      "output_shapes": [
+        1,
+        768,
+        20,
+        20
+      ]
+    },
+    {
+      "index": 21,
+      "module": "C2f",
+      "source": -1,
+      "repeats": 1,
+      "conv_flops": 1572864000,
+      "input_shapes": [
+        [
+          1,
+          768,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        512,
+        20,
+        20
+      ]
+    },
+    {
+      "index": 22,
+      "module": "Detect",
+      "source": [
+        15,
+        18,
+        21
+      ],
+      "repeats": 1,
+      "conv_flops": 8127436800,
+      "input_shapes": [
+        [
+          [
+            1,
+            128,
+            80,
+            80
+          ],
+          [
+            1,
+            256,
+            40,
+            40
+          ],
+          [
+            1,
+            512,
+            20,
+            20
+          ]
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          7,
+          8400
+        ],
+        {
+          "boxes": [
+            1,
+            64,
+            8400
+          ],
+          "scores": [
+            1,
+            3,
+            8400
+          ],
+          "feats": [
+            [
+              1,
+              128,
+              80,
+              80
+            ],
+            [
+              1,
+              256,
+              40,
+              40
+            ],
+            [
+              1,
+              512,
+              20,
+              20
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "convolutions": [
+    {
+      "block": 0,
+      "name": "conv",
+      "in_channels": 3,
+      "out_channels": 32,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          3,
+          640,
+          640
+        ]
+      ],
+      "output_shapes": [
+        1,
+        32,
+        320,
+        320
+      ],
+      "conv_flops": 176947200
+    },
+    {
+      "block": 1,
+      "name": "conv",
+      "in_channels": 32,
+      "out_channels": 64,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          32,
+          320,
+          320
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        160,
+        160
+      ],
+      "conv_flops": 943718400
+    },
+    {
+      "block": 2,
+      "name": "cv1.conv",
+      "in_channels": 64,
+      "out_channels": 64,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          64,
+          160,
+          160
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        160,
+        160
+      ],
+      "conv_flops": 209715200
+    },
+    {
+      "block": 2,
+      "name": "m.0.cv1.conv",
+      "in_channels": 32,
+      "out_channels": 32,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          32,
+          160,
+          160
+        ]
+      ],
+      "output_shapes": [
+        1,
+        32,
+        160,
+        160
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 2,
+      "name": "m.0.cv2.conv",
+      "in_channels": 32,
+      "out_channels": 32,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          32,
+          160,
+          160
+        ]
+      ],
+      "output_shapes": [
+        1,
+        32,
+        160,
+        160
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 2,
+      "name": "cv2.conv",
+      "in_channels": 96,
+      "out_channels": 64,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          96,
+          160,
+          160
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        160,
+        160
+      ],
+      "conv_flops": 314572800
+    },
+    {
+      "block": 3,
+      "name": "conv",
+      "in_channels": 64,
+      "out_channels": 128,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          64,
+          160,
+          160
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        80,
+        80
+      ],
+      "conv_flops": 943718400
+    },
+    {
+      "block": 4,
+      "name": "cv1.conv",
+      "in_channels": 128,
+      "out_channels": 128,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        80,
+        80
+      ],
+      "conv_flops": 209715200
+    },
+    {
+      "block": 4,
+      "name": "m.0.cv1.conv",
+      "in_channels": 64,
+      "out_channels": 64,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          64,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        80,
+        80
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 4,
+      "name": "m.0.cv2.conv",
+      "in_channels": 64,
+      "out_channels": 64,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          64,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        80,
+        80
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 4,
+      "name": "m.1.cv1.conv",
+      "in_channels": 64,
+      "out_channels": 64,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          64,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        80,
+        80
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 4,
+      "name": "m.1.cv2.conv",
+      "in_channels": 64,
+      "out_channels": 64,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          64,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        80,
+        80
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 4,
+      "name": "cv2.conv",
+      "in_channels": 256,
+      "out_channels": 128,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          256,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        80,
+        80
+      ],
+      "conv_flops": 419430400
+    },
+    {
+      "block": 5,
+      "name": "conv",
+      "in_channels": 128,
+      "out_channels": 256,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        40,
+        40
+      ],
+      "conv_flops": 943718400
+    },
+    {
+      "block": 6,
+      "name": "cv1.conv",
+      "in_channels": 256,
+      "out_channels": 256,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          256,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        40,
+        40
+      ],
+      "conv_flops": 209715200
+    },
+    {
+      "block": 6,
+      "name": "m.0.cv1.conv",
+      "in_channels": 128,
+      "out_channels": 128,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        40,
+        40
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 6,
+      "name": "m.0.cv2.conv",
+      "in_channels": 128,
+      "out_channels": 128,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        40,
+        40
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 6,
+      "name": "m.1.cv1.conv",
+      "in_channels": 128,
+      "out_channels": 128,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        40,
+        40
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 6,
+      "name": "m.1.cv2.conv",
+      "in_channels": 128,
+      "out_channels": 128,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        40,
+        40
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 6,
+      "name": "cv2.conv",
+      "in_channels": 512,
+      "out_channels": 256,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          512,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        40,
+        40
+      ],
+      "conv_flops": 419430400
+    },
+    {
+      "block": 7,
+      "name": "conv",
+      "in_channels": 256,
+      "out_channels": 512,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          256,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        512,
+        20,
+        20
+      ],
+      "conv_flops": 943718400
+    },
+    {
+      "block": 8,
+      "name": "cv1.conv",
+      "in_channels": 512,
+      "out_channels": 512,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          512,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        512,
+        20,
+        20
+      ],
+      "conv_flops": 209715200
+    },
+    {
+      "block": 8,
+      "name": "m.0.cv1.conv",
+      "in_channels": 256,
+      "out_channels": 256,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          256,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        20,
+        20
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 8,
+      "name": "m.0.cv2.conv",
+      "in_channels": 256,
+      "out_channels": 256,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          256,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        20,
+        20
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 8,
+      "name": "cv2.conv",
+      "in_channels": 768,
+      "out_channels": 512,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          768,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        512,
+        20,
+        20
+      ],
+      "conv_flops": 314572800
+    },
+    {
+      "block": 9,
+      "name": "cv1.conv",
+      "in_channels": 512,
+      "out_channels": 256,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          512,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        20,
+        20
+      ],
+      "conv_flops": 104857600
+    },
+    {
+      "block": 9,
+      "name": "cv2.conv",
+      "in_channels": 1024,
+      "out_channels": 512,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          1024,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        512,
+        20,
+        20
+      ],
+      "conv_flops": 419430400
+    },
+    {
+      "block": 12,
+      "name": "cv1.conv",
+      "in_channels": 768,
+      "out_channels": 256,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          768,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        40,
+        40
+      ],
+      "conv_flops": 629145600
+    },
+    {
+      "block": 12,
+      "name": "m.0.cv1.conv",
+      "in_channels": 128,
+      "out_channels": 128,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        40,
+        40
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 12,
+      "name": "m.0.cv2.conv",
+      "in_channels": 128,
+      "out_channels": 128,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        40,
+        40
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 12,
+      "name": "cv2.conv",
+      "in_channels": 384,
+      "out_channels": 256,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          384,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        40,
+        40
+      ],
+      "conv_flops": 314572800
+    },
+    {
+      "block": 15,
+      "name": "cv1.conv",
+      "in_channels": 384,
+      "out_channels": 128,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          384,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        80,
+        80
+      ],
+      "conv_flops": 629145600
+    },
+    {
+      "block": 15,
+      "name": "m.0.cv1.conv",
+      "in_channels": 64,
+      "out_channels": 64,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          64,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        80,
+        80
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 15,
+      "name": "m.0.cv2.conv",
+      "in_channels": 64,
+      "out_channels": 64,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          64,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        80,
+        80
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 15,
+      "name": "cv2.conv",
+      "in_channels": 192,
+      "out_channels": 128,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          192,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        80,
+        80
+      ],
+      "conv_flops": 314572800
+    },
+    {
+      "block": 16,
+      "name": "conv",
+      "in_channels": 128,
+      "out_channels": 128,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        40,
+        40
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 18,
+      "name": "cv1.conv",
+      "in_channels": 384,
+      "out_channels": 256,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          384,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        40,
+        40
+      ],
+      "conv_flops": 314572800
+    },
+    {
+      "block": 18,
+      "name": "m.0.cv1.conv",
+      "in_channels": 128,
+      "out_channels": 128,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        40,
+        40
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 18,
+      "name": "m.0.cv2.conv",
+      "in_channels": 128,
+      "out_channels": 128,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        40,
+        40
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 18,
+      "name": "cv2.conv",
+      "in_channels": 384,
+      "out_channels": 256,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          384,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        40,
+        40
+      ],
+      "conv_flops": 314572800
+    },
+    {
+      "block": 19,
+      "name": "conv",
+      "in_channels": 256,
+      "out_channels": 256,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          256,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        20,
+        20
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 21,
+      "name": "cv1.conv",
+      "in_channels": 768,
+      "out_channels": 512,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          768,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        512,
+        20,
+        20
+      ],
+      "conv_flops": 314572800
+    },
+    {
+      "block": 21,
+      "name": "m.0.cv1.conv",
+      "in_channels": 256,
+      "out_channels": 256,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          256,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        20,
+        20
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 21,
+      "name": "m.0.cv2.conv",
+      "in_channels": 256,
+      "out_channels": 256,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          256,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        256,
+        20,
+        20
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 21,
+      "name": "cv2.conv",
+      "in_channels": 768,
+      "out_channels": 512,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          768,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        512,
+        20,
+        20
+      ],
+      "conv_flops": 314572800
+    },
+    {
+      "block": 22,
+      "name": "cv2.0.0.conv",
+      "in_channels": 128,
+      "out_channels": 64,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        80,
+        80
+      ],
+      "conv_flops": 943718400
+    },
+    {
+      "block": 22,
+      "name": "cv2.0.1.conv",
+      "in_channels": 64,
+      "out_channels": 64,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          64,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        80,
+        80
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 22,
+      "name": "cv2.0.2",
+      "in_channels": 64,
+      "out_channels": 64,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          64,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        80,
+        80
+      ],
+      "conv_flops": 52428800
+    },
+    {
+      "block": 22,
+      "name": "cv2.1.0.conv",
+      "in_channels": 256,
+      "out_channels": 64,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          256,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        40,
+        40
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 22,
+      "name": "cv2.1.1.conv",
+      "in_channels": 64,
+      "out_channels": 64,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          64,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        40,
+        40
+      ],
+      "conv_flops": 117964800
+    },
+    {
+      "block": 22,
+      "name": "cv2.1.2",
+      "in_channels": 64,
+      "out_channels": 64,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          64,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        40,
+        40
+      ],
+      "conv_flops": 13107200
+    },
+    {
+      "block": 22,
+      "name": "cv2.2.0.conv",
+      "in_channels": 512,
+      "out_channels": 64,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          512,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        20,
+        20
+      ],
+      "conv_flops": 235929600
+    },
+    {
+      "block": 22,
+      "name": "cv2.2.1.conv",
+      "in_channels": 64,
+      "out_channels": 64,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          64,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        20,
+        20
+      ],
+      "conv_flops": 29491200
+    },
+    {
+      "block": 22,
+      "name": "cv2.2.2",
+      "in_channels": 64,
+      "out_channels": 64,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          64,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        64,
+        20,
+        20
+      ],
+      "conv_flops": 3276800
+    },
+    {
+      "block": 22,
+      "name": "cv3.0.0.conv",
+      "in_channels": 128,
+      "out_channels": 128,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        80,
+        80
+      ],
+      "conv_flops": 1887436800
+    },
+    {
+      "block": 22,
+      "name": "cv3.0.1.conv",
+      "in_channels": 128,
+      "out_channels": 128,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        80,
+        80
+      ],
+      "conv_flops": 1887436800
+    },
+    {
+      "block": 22,
+      "name": "cv3.0.2",
+      "in_channels": 128,
+      "out_channels": 3,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          80,
+          80
+        ]
+      ],
+      "output_shapes": [
+        1,
+        3,
+        80,
+        80
+      ],
+      "conv_flops": 4915200
+    },
+    {
+      "block": 22,
+      "name": "cv3.1.0.conv",
+      "in_channels": 256,
+      "out_channels": 128,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          256,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        40,
+        40
+      ],
+      "conv_flops": 943718400
+    },
+    {
+      "block": 22,
+      "name": "cv3.1.1.conv",
+      "in_channels": 128,
+      "out_channels": 128,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        40,
+        40
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 22,
+      "name": "cv3.1.2",
+      "in_channels": 128,
+      "out_channels": 3,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          40,
+          40
+        ]
+      ],
+      "output_shapes": [
+        1,
+        3,
+        40,
+        40
+      ],
+      "conv_flops": 1228800
+    },
+    {
+      "block": 22,
+      "name": "cv3.2.0.conv",
+      "in_channels": 512,
+      "out_channels": 128,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          512,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        20,
+        20
+      ],
+      "conv_flops": 471859200
+    },
+    {
+      "block": 22,
+      "name": "cv3.2.1.conv",
+      "in_channels": 128,
+      "out_channels": 128,
+      "kernel": [
+        3,
+        3
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        128,
+        20,
+        20
+      ],
+      "conv_flops": 117964800
+    },
+    {
+      "block": 22,
+      "name": "cv3.2.2",
+      "in_channels": 128,
+      "out_channels": 3,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          128,
+          20,
+          20
+        ]
+      ],
+      "output_shapes": [
+        1,
+        3,
+        20,
+        20
+      ],
+      "conv_flops": 307200
+    },
+    {
+      "block": 22,
+      "name": "dfl.conv",
+      "in_channels": 16,
+      "out_channels": 1,
+      "kernel": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "input_shapes": [
+        [
+          1,
+          16,
+          4,
+          8400
+        ]
+      ],
+      "output_shapes": [
+        1,
+        1,
+        4,
+        8400
+      ],
+      "conv_flops": 1075200
+    }
+  ]
+}

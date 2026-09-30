@@ -1,0 +1,15 @@
+{
+  "host": "DESKTOP-B29DLEA",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+  "torch": "2.11.0+cu128",
+  "ultralytics": "8.4.158",
+  "imgsz": 640,
+  "device": "cpu",
+  "threads": 1,
+  "conf": 0.001,
+  "iou": 0.7,
+  "max_det": 300,
+  "warmup": 50,
+  "benchmark_repetitions": 500
+}

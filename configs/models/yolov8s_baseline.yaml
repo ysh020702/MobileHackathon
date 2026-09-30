@@ -1,0 +1,50 @@
+# Ultralytics YOLOv8 구조 (AGPL-3.0):
+# https://github.com/ultralytics/ultralytics/blob/main/ultralytics/cfg/models/v8/yolov8.yaml
+# train.py가 실험 시작 시 이 구조를 복사해 사용합니다. yolov8s은 small 크기입니다.
+#
+# 수정 시작점:
+#   1) scales.s의 depth/width: 전체 깊이/채널 수 조절
+#   2) backbone의 Conv/C2f: 특징 추출 구조 수정
+#   3) head: 여러 크기의 특징을 합치고 최종 탐지하는 구조 수정
+# COCO 가중치를 로드하지 않습니다. 구조마다 KITTI로 처음부터 학습합니다.
+
+nc: 3  # KITTI: 0=Car, 1=Pedestrian, 2=Cyclist. 데이터셋 names와 일치해야 합니다.
+scales:
+  # [depth: 반복 수 배율, width: 채널 수 배율, max_channels: 채널 상한]
+  # 구조 비교 시 한 번에 한 가지 값을 변경하세요. 다른 실험 이름으로 동일 조건에서 재학습합니다.
+  s: [0.33, 0.50, 1024]
+
+# 각 줄: [from, repeats, module, args]
+# from=-1: 직전 레이어 출력. 숫자는 아래 주석의 레이어 번호(0부터 시작).
+# repeats: 기본 반복 수; depth 배율 적용. 채널 수에는 width 배율이 적용됩니다.
+# Conv의 args=[출력 채널 수, 커널 크기, stride]. stride=2이면 공간 해상도가 절반.
+# C2f의 args=[출력 채널 수, shortcut 사용 여부]. 특징을 학습하는 블록입니다.
+backbone:
+  - [-1, 1, Conv, [64, 3, 2]]       # 0: P1/2
+  - [-1, 1, Conv, [128, 3, 2]]      # 1: P2/4
+  - [-1, 3, C2f, [128, True]]      # 2
+  - [-1, 1, Conv, [256, 3, 2]]      # 3: P3/8
+  - [-1, 6, C2f, [256, True]]      # 4
+  - [-1, 1, Conv, [512, 3, 2]]      # 5: P4/16
+  - [-1, 6, C2f, [512, True]]      # 6
+  - [-1, 1, Conv, [1024, 3, 2]]     # 7: P5/32
+  - [-1, 3, C2f, [1024, True]]     # 8
+  - [-1, 1, SPPF, [1024, 5]]       # 9: 여러 범위의 공간 정보를 모음
+
+# Upsample: 해상도 2배. Concat: 지정 레이어들의 특징을 채널 방향으로 연결.
+# 연결하려는 특징의 높이/너비가 같아야 합니다.
+# 레이어를 추가/삭제하면 from의 번호와 마지막 Detect의 번호도 수정해야 합니다.
+head:
+  - [-1, 1, nn.Upsample, [null, 2, nearest]] # 10
+  - [[-1, 6], 1, Concat, [1]]              # 11: backbone 6번과 결합
+  - [-1, 3, C2f, [512]]                    # 12
+  - [-1, 1, nn.Upsample, [null, 2, nearest]] # 13
+  - [[-1, 4], 1, Concat, [1]]              # 14: backbone 4번과 결합
+  - [-1, 3, C2f, [256]]                    # 15: 작은 물체용 특징 (P3)
+  - [-1, 1, Conv, [256, 3, 2]]             # 16
+  - [[-1, 12], 1, Concat, [1]]             # 17
+  - [-1, 3, C2f, [512]]                    # 18: 중간 물체용 특징 (P4)
+  - [-1, 1, Conv, [512, 3, 2]]             # 19
+  - [[-1, 9], 1, Concat, [1]]              # 20
+  - [-1, 3, C2f, [1024]]                   # 21: 큰 물체용 특징 (P5)
+  - [[15, 18, 21], 1, Detect, [nc]]         # 22: 세 크기의 특징에서 박스/클래스 예측

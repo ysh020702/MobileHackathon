@@ -1,0 +1,7 @@
+ultralytics==8.4.158
+matplotlib==3.11.2
+psutil==7.2.2
+PyYAML==6.0.3
+Pillow==12.3.0
+onnx==1.23.0
+onnxruntime==1.30.0
